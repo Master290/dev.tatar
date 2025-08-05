@@ -72,10 +72,6 @@
             cursor: pointer;
         }
 
-
-
-
-
         .lyrics {
             position: fixed;
             top: 50%;
@@ -99,12 +95,12 @@
 
         .ascii-art {
             position: fixed;
-            bottom: 80px;
+            bottom: 180px;
             left: 50%;
             transform: translateX(-50%);
             color: white;
             font-family: 'Courier New', monospace;
-            font-size: 12px;
+            font-size: 15px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
@@ -113,9 +109,39 @@
             line-height: 1;
         }
 
+        .author-info {
+            position: fixed;
+            bottom: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            pointer-events: none;
+            line-height: 1.4;
+        }
+
+        .author-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .author-details {
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .author-details .passion {
+            color: #aaa;
+            font-style: italic;
+        }
+
         .links {
             position: fixed;
-            bottom: 20px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
             color: white;
@@ -142,19 +168,60 @@
             color: white;
         }
 
+        .copyright-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #ccc;
+            font-size: 10px;
+            text-align: center;
+            padding: 8px 10px;
+            z-index: 11;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.3;
+        }
+
+        .copyright-footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .copyright-footer a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .ascii-art {
                 font-size: 8px;
-                bottom: 100px;
+                bottom: 175px;
+            }
+
+            .author-info {
+                font-size: 12px;
+                bottom: 110px;
+            }
+
+            .author-name {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .author-details {
+                font-size: 10px;
             }
 
             .links {
                 font-size: 12px;
-                bottom: 30px;
+                bottom: 70px;
             }
-        }
 
-        @media (max-width: 768px) {
+            .copyright-footer {
+                font-size: 9px;
+                padding: 6px 8px;
+            }
+
             .start-button {
                 padding: 15px 30px;
                 font-size: 18px;
@@ -194,9 +261,21 @@
 / /_/ /  __/ |/ // /_/ /_/ / /_/ /_/ / /    
 \__,_/\___/|___(_)__/\__,_/\__/\__,_/_/     </div>
 
+        <div class="author-info">
+            <div class="author-name">Daniar Mannanov</div>
+            <div class="author-details">Full-stack Developer • <span class="passion">Music Lover</span></div>
+        </div>
+
         <div class="links">
             <a href="https://t.me/everydaylinuxuser" target="_blank" class="social-link">telegram</a>
             <a href="https://github.com/master290" target="_blank" class="social-link">github</a>
+        </div>
+
+        <div class="copyright-footer">
+            © Music Video: <strong>Roni Size / Reprazent - Brown Paper Bag</strong> | 
+            All rights belong to their respective owners | 
+            <a href="#">Talkin' Loud Records</a> / <a href="#">Mercury Records</a> / <a href="#">Universal Music Group</a> | 
+            Used for non-commercial purposes
         </div>
     </div>
 
@@ -207,199 +286,11 @@
             const video = document.getElementById('main-video');
             const lyricsElement = document.getElementById('lyrics');
 
-             /* function timeToSeconds(timeStr) {
-                const parts = timeStr.split(':');
-                const minutes = parseInt(parts[0]);
-                const seconds = parseFloat(parts[1]);
-                return minutes * 60 + seconds;
-            }
-
-            const wordTimings = [
-                // You are my angel
-                { time: timeToSeconds("00:36.08"), word: "You" },
-                { time: timeToSeconds("00:38.49"), word: "are" },
-                { time: timeToSeconds("00:40.61"), word: "my" },
-                { time: timeToSeconds("00:41.21"), word: "angel" },
-
-                // Come from way above
-                { time: timeToSeconds("00:54.32"), word: "Come" },
-                { time: timeToSeconds("00:54.98"), word: "from" },
-                { time: timeToSeconds("00:55.56"), word: "way" },
-                { time: timeToSeconds("00:56.05"), word: "above" },
-
-                // To bring me love (To bring me love)
-                { time: timeToSeconds("00:59.67"), word: "To" },
-                { time: timeToSeconds("00:59.97"), word: "bring" },
-                { time: timeToSeconds("01:00.58"), word: "me" },
-                { time: timeToSeconds("01:00.84"), word: "love" },
-                { time: timeToSeconds("01:01.13"), word: "(To" },
-                { time: timeToSeconds("01:01.72"), word: "bring" },
-                { time: timeToSeconds("01:02.03"), word: "me" },
-                { time: timeToSeconds("01:02.03"), word: "love)" },
-
-                // Her eyes
-                { time: timeToSeconds("01:25.62"), word: "Her" },
-                { time: timeToSeconds("01:25.93"), word: "eyes" },
-
-                // She's on the dark side
-                { time: timeToSeconds("01:29.03"), word: "She's" },
-                { time: timeToSeconds("01:29.39"), word: "on" },
-                { time: timeToSeconds("01:29.88"), word: "the" },
-                { time: timeToSeconds("01:30.22"), word: "dark" },
-                { time: timeToSeconds("01:30.72"), word: "side" },
-
-                // Neutralize
-                { time: timeToSeconds("01:34.57"), word: "Neutralize" },
-
-                // Every man in sight (x2)
-                { time: timeToSeconds("01:37.46"), word: "Every" },
-                { time: timeToSeconds("01:37.75"), word: "man" },
-                { time: timeToSeconds("01:38.11"), word: "in" },
-                { time: timeToSeconds("01:38.90"), word: "sight" },
-                { time: timeToSeconds("01:39.68"), word: "Every" },
-                { time: timeToSeconds("01:40.05"), word: "man" },
-                { time: timeToSeconds("01:40.44"), word: "in" },
-                { time: timeToSeconds("01:41.18"), word: "sight" },
-
-                // Love you repetitions
-                { time: timeToSeconds("01:48.07"), word: "Love" },
-                { time: timeToSeconds("01:48.33"), word: "you," },
-                { time: timeToSeconds("01:48.58"), word: "love" },
-                { time: timeToSeconds("01:48.85"), word: "you," },
-                { time: timeToSeconds("01:49.12"), word: "love" },
-                { time: timeToSeconds("01:49.38"), word: "you," },
-                { time: timeToSeconds("01:49.70"), word: "love" },
-                { time: timeToSeconds("01:49.96"), word: "you" },
-
-                { time: timeToSeconds("01:50.25"), word: "Love" },
-                { time: timeToSeconds("01:50.52"), word: "you," },
-                { time: timeToSeconds("01:50.83"), word: "love" },
-                { time: timeToSeconds("01:51.11"), word: "you," },
-                { time: timeToSeconds("01:51.40"), word: "love" },
-                { time: timeToSeconds("01:51.68"), word: "you," },
-                { time: timeToSeconds("01:51.96"), word: "love" },
-                { time: timeToSeconds("01:52.24"), word: "you" },
-
-                { time: timeToSeconds("01:52.49"), word: "Love" },
-                { time: timeToSeconds("01:52.76"), word: "you," },
-                { time: timeToSeconds("01:53.09"), word: "love" },
-                { time: timeToSeconds("01:53.38"), word: "you," },
-                { time: timeToSeconds("01:53.67"), word: "love" },
-                { time: timeToSeconds("01:53.94"), word: "you," },
-                { time: timeToSeconds("01:54.23"), word: "love" },
-                { time: timeToSeconds("01:54.49"), word: "you" },
-
-                { time: timeToSeconds("01:54.77"), word: "Love" },
-                { time: timeToSeconds("01:55.02"), word: "you," },
-                { time: timeToSeconds("01:55.32"), word: "love" },
-                { time: timeToSeconds("01:55.59"), word: "you," },
-                { time: timeToSeconds("01:55.89"), word: "love" },
-                { time: timeToSeconds("01:56.15"), word: "you," },
-                { time: timeToSeconds("01:56.45"), word: "love" },
-                { time: timeToSeconds("01:56.72"), word: "you" },
-
-                { time: timeToSeconds("01:57.00"), word: "Love" },
-                { time: timeToSeconds("01:57.27"), word: "you," },
-                { time: timeToSeconds("01:57.59"), word: "love" },
-                { time: timeToSeconds("01:57.87"), word: "you," },
-                { time: timeToSeconds("01:58.16"), word: "love" },
-                { time: timeToSeconds("01:58.45"), word: "you," },
-                { time: timeToSeconds("01:58.73"), word: "love" },
-                { time: timeToSeconds("01:59.00"), word: "you" },
-
-                { time: timeToSeconds("01:59.26"), word: "Love" },
-                { time: timeToSeconds("01:59.53"), word: "you," },
-                { time: timeToSeconds("01:59.81"), word: "love" },
-                { time: timeToSeconds("02:00.08"), word: "you," },
-                { time: timeToSeconds("02:00.38"), word: "love" },
-                { time: timeToSeconds("02:00.66"), word: "you," },
-                { time: timeToSeconds("02:00.93"), word: "love" },
-                { time: timeToSeconds("02:01.22"), word: "you," },
-                { time: timeToSeconds("02:01.50"), word: "love" },
-                { time: timeToSeconds("02:01.77"), word: "you" },
-
-                { time: timeToSeconds("02:36.98"), word: "You" },
-                { time: timeToSeconds("02:40.63"), word: "are" },
-                { time: timeToSeconds("02:41.40"), word: "my" },
-                { time: timeToSeconds("02:42.03"), word: "angel" },
-
-                { time: timeToSeconds("02:55.05"), word: "Come" },
-                { time: timeToSeconds("02:55.71"), word: "from" },
-                { time: timeToSeconds("02:56.31"), word: "way" },
-                { time: timeToSeconds("02:56.79"), word: "above" },
-
-                { time: timeToSeconds("03:58.98"), word: "Love" },
-                { time: timeToSeconds("03:59.18"), word: "you," },
-                { time: timeToSeconds("03:59.45"), word: "love" },
-                { time: timeToSeconds("03:59.71"), word: "you," },
-                { time: timeToSeconds("04:00.01"), word: "love" },
-                { time: timeToSeconds("04:00.28"), word: "you," },
-                { time: timeToSeconds("04:00.55"), word: "love" },
-                { time: timeToSeconds("04:00.79"), word: "you" },
-
-                { time: timeToSeconds("04:01.11"), word: "Love" },
-                { time: timeToSeconds("04:01.39"), word: "you," },
-                { time: timeToSeconds("04:01.67"), word: "love" },
-                { time: timeToSeconds("04:01.94"), word: "you," },
-                { time: timeToSeconds("04:02.24"), word: "love" },
-                { time: timeToSeconds("04:02.50"), word: "you," },
-                { time: timeToSeconds("04:02.80"), word: "love" },
-                { time: timeToSeconds("04:03.06"), word: "you" },
-
-                { time: timeToSeconds("04:03.35"), word: "Love" },
-                { time: timeToSeconds("04:03.64"), word: "you," },
-                { time: timeToSeconds("04:03.91"), word: "love" },
-                { time: timeToSeconds("04:04.18"), word: "you," },
-                { time: timeToSeconds("04:04.48"), word: "love" },
-                { time: timeToSeconds("04:04.72"), word: "you," },
-                { time: timeToSeconds("04:05.01"), word: "love" },
-                { time: timeToSeconds("04:05.28"), word: "you" },
-
-                { time: timeToSeconds("04:05.57"), word: "Love" },
-                { time: timeToSeconds("04:05.83"), word: "you," },
-                { time: timeToSeconds("04:06.13"), word: "love" },
-                { time: timeToSeconds("04:06.44"), word: "you," },
-                { time: timeToSeconds("04:06.72"), word: "love" },
-                { time: timeToSeconds("04:06.97"), word: "you," },
-                { time: timeToSeconds("04:07.25"), word: "love" },
-                { time: timeToSeconds("04:07.53"), word: "you" },
-
-                { time: timeToSeconds("04:07.82"), word: "Love" },
-                { time: timeToSeconds("04:08.10"), word: "you," },
-                { time: timeToSeconds("04:08.38"), word: "love" },
-                { time: timeToSeconds("04:08.62"), word: "you," },
-                { time: timeToSeconds("04:08.91"), word: "love" },
-                { time: timeToSeconds("04:09.19"), word: "you" }
-            ];
-
-            let currentWordIndex = -1;
-            let wordDisplayTimeout;
-
             function updateLyrics() {
                 if (video.paused || overlay.classList.contains('hidden') === false) {
                     return;
                 }
-
-                const currentTime = video.currentTime;
-
-                for (let i = 0; i < wordTimings.length; i++) {
-                    const wordTiming = wordTimings[i];
-
-                    if (currentTime >= wordTiming.time && currentTime < wordTiming.time + 0.5) {
-                        if (currentWordIndex !== i) {
-                            currentWordIndex = i;
-                            lyricsElement.textContent = wordTiming.word;
-                            lyricsElement.classList.add('show');
-
-                            clearTimeout(wordDisplayTimeout);
-                            wordDisplayTimeout = setTimeout(() => {
-                                lyricsElement.classList.remove('show');
-                            }, 2000);
-                        }
-                        return;
-                    }
-                }
-            } */
+            }
 
             startButton.addEventListener('click', function() {
                 overlay.classList.add('hidden');
