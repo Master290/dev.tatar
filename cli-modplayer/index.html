@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cli-modplayer - MOD Tracker Player for Linux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid #4c9aff;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4c9aff;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            color: #a0a0a0;
+        }
+
+        .video-section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 2px solid #4c9aff;
+            border-radius: 4px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+
+        h2 {
+            color: #4c9aff;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #c0c0c0;
+        }
+
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .features li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #4c9aff;
+        }
+
+        .install-box {
+            background: #1a1f3a;
+            border-left: 4px solid #4c9aff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            color: #6dd4ff;
+        }
+
+        .button {
+            display: inline-block;
+            background: #4c9aff;
+            color: #0a0e27;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 10px 10px 10px 0;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #6dd4ff;
+        }
+
+        .buttons {
+            margin: 30px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #2a2f4a;
+            color: #707070;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .control-item {
+            background: #1a1f3a;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .key {
+            color: #4c9aff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>cli-modplayer</h1>
+            <p class="tagline">Play tracker music in your terminal</p>
+        </header>
+
+        <section class="video-section">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/P0_rXYO8r1w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section>
+            <h2>What is this?</h2>
+            <p>A terminal-based player for MOD tracker files. Runs on Linux, plays your .mod, .xm, .s3m, and .it files with a live pattern view like the old ProTracker days.</p>
+            <p>Shows notes scrolling past, VU meters for each channel, FFT spectrum analyzer, and a real-time oscilloscope. Everything runs in your terminal.</p>
+        </section>
+
+        <section style="text-align: center; margin: 40px 0;">
+            <img src="screenshot.png" alt="cli-modplayer screenshot" style="max-width: 100%;">
+        </section>
+
+        <section>
+            <h2>Quick features</h2>
+            <ul class="features">
+                <li>File browser - pick files without typing paths</li>
+                <li>Pattern view with notes scrolling in real-time</li>
+                <li>VU meters and spectrum analyzer (20 bands, 20Hz-20kHz)</li>
+                <li>Oscilloscope showing left and right channel waveforms</li>
+                <li>Audio effects - bass boost, echo, reverb, flanger, phaser, chorus</li>
+                <li>Export to WAV, MP3, or FLAC with your effects baked in</li>
+                <li>Volume control that saves to config</li>
+                <li>Module info overlay - see all instruments and messages</li>
+                <li>About page with project details</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Get it running</h2>
+            <p>You need these packages (Debian/Ubuntu example):</p>
+            <div class="install-box">
+                <code>sudo apt install g++ cmake libopenmpt-dev portaudio19-dev</code>
+            </div>
+
+            <p>Optional for export formats:</p>
+            <div class="install-box">
+                <code>sudo apt install libmp3lame-dev libflac-dev</code>
+            </div>
+
+            <p>Build it:</p>
+            <div class="install-box">
+                <code>cmake -S . -B build<br>cmake --build build</code>
+            </div>
+
+            <p>Run it:</p>
+            <div class="install-box">
+                <code>./build/cli-modplayer<br># or<br>./build/cli-modplayer /path/to/song.mod</code>
+            </div>
+        </section>
+
+        <section>
+            <h2>How to use it</h2>
+            <div class="controls-grid">
+                <div class="control-item">
+                    <span class="key">Space</span> - pause/resume
+                </div>
+                <div class="control-item">
+                    <span class="key">← →</span> - jump orders
+                </div>
+                <div class="control-item">
+                    <span class="key">+ -</span> - volume up/down
+                </div>
+                <div class="control-item">
+                    <span class="key">M</span> - mute toggle
+                </div>
+                <div class="control-item">
+                    <span class="key">E</span> - cycle audio effects
+                </div>
+                <div class="control-item">
+                    <span class="key">X</span> - export dialog
+                </div>
+                <div class="control-item">
+                    <span class="key">N</span> - module info (scrollable)
+                </div>
+                <div class="control-item">
+                    <span class="key">A</span> - about page
+                </div>
+                <div class="control-item">
+                    <span class="key">Q</span> - quit
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>What's new in 1.3.0</h2>
+            <p>Added About page (press A) with ASCII art, version info, and credits. Module info overlay (press N) now shows everything without limits - all instruments and messages with proper scrolling using arrow keys, j/k, or PageUp/PageDown. Module info and export dialogs dim the background now and info window adapts to content size. Fixed playhead centering (was off by one), export thread doesn't hold mutex for entire duration anymore, arrow keys work properly in overlays, and info shows actual content height. Added file browser that starts when you run the program without arguments - shows only module files (.mod, .xm, .s3m, .it) with file sizes, navigate with arrow keys or j/k, Enter to select, Backspace for parent directory, Home/End to jump around, PgUp/PgDn to scroll fast, Q to quit. Built real-time oscilloscope with separate left (cyan) and right (green) waveforms using 512 samples per channel, updates live from audio stream and sits next to the FFT spectrum analyzer. Renamed project from cli-tracker to cli-modplayer so the executable is now called cli-modplayer. Added FileBrowser class for filesystem stuff, update_waveform() method in Player for capturing audio data, waveform_left and waveform_right fields in TransportState with thread-safe buffer handling. FFT spectrum analyzer with 20 logarithmic bands, audio effects (Bass Boost, Echo, Reverb, Flanger, Phaser, Chorus), export to WAV/MP3/FLAC</p>
+        </section>
+
+        <div class="buttons">
+            <a href="https://github.com/Master290/cli-modplayer" class="button">View on GitHub</a>
+            <a href="https://github.com/Master290/cli-modplayer/releases" class="button">Download Release</a>
+        </div>
+
+        <footer>
+            <p>cli-modplayer v1.3.0 - MIT License</p>
+            <p>© 2025 Daniar Mannanov (Master290, daniar@dev.tatar)</p>
+        </footer>
+    </div>
+</body>
+</html>
