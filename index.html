@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dev.tatar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New';
             background-color: #000;
             overflow: hidden;
         }
@@ -70,6 +71,7 @@
             padding: 15px 30px;
             font-size: 18px;
             cursor: pointer;
+            font-family: 'Courier New';
         }
 
         .lyrics {
@@ -87,46 +89,262 @@
             pointer-events: none;
             text-transform: uppercase;
             line-height: 1.2;
+            font-family: 'Courier New';
         }
 
         .lyrics.show {
             display: block;
         }
 
+        @keyframes glitchReveal {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                text-shadow: 
+                    -5px -5px 0 #00ff00,
+                    5px 5px 0 #ff00ff,
+                    -5px 5px 0 #00ffff,
+                    5px -5px 0 #ffff00;
+            }
+            20% {
+                opacity: 0.5;
+                filter: blur(5px);
+                text-shadow: 
+                    -3px -3px 0 #00ff00,
+                    3px 3px 0 #ff00ff,
+                    -3px 3px 0 #00ffff,
+                    3px -3px 0 #ffff00;
+            }
+            40% {
+                opacity: 0.7;
+                filter: blur(3px);
+                text-shadow: 
+                    -2px -2px 0 #00ff00,
+                    2px 2px 0 #ff00ff;
+            }
+            60% {
+                opacity: 0.9;
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+
         .ascii-art {
             position: fixed;
-            bottom: 180px;
+            bottom: 115px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff00;
+            font-size: 10px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            pointer-events: auto;
+            line-height: 1.2;
+            font-family: 'Courier New';
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
+        }
+
+        .project-info.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-info a {
+            color: #4c9aff;
+            text-decoration: none;
+            border-bottom: 1px dashed #4c9aff;
+        }
+
+        .project-info a:hover {
+            color: #66a8ff;
+            border-bottom: 1px solid #66a8ff;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #000;
+            pointer-events: none;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
+
+        .overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .start-button {
+            background: #808080;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Courier New';
+        }
+
+        .lyrics {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            display: none;
+            pointer-events: none;
+            text-transform: uppercase;
+            line-height: 1.2;
+            font-family: 'Courier New';
+        }
+
+        .lyrics.show {
+            display: block;
+        }
+
+        @keyframes glitchReveal {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                text-shadow: 
+                    -5px -5px 0 #00ff00,
+                    5px 5px 0 #ff00ff,
+                    -5px 5px 0 #00ffff,
+                    5px -5px 0 #ffff00;
+            }
+            20% {
+                opacity: 0.5;
+                filter: blur(5px);
+                text-shadow: 
+                    -3px -3px 0 #00ff00,
+                    3px 3px 0 #ff00ff,
+                    -3px 3px 0 #00ffff,
+                    3px -3px 0 #ffff00;
+            }
+            40% {
+                opacity: 0.7;
+                filter: blur(3px);
+                text-shadow: 
+                    -2px -2px 0 #00ff00,
+                    2px 2px 0 #ff00ff;
+            }
+            60% {
+                opacity: 0.9;
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        .ascii-art {
+            position: fixed;
+            bottom: 210px;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            font-family: 'Courier New', monospace;
-            font-size: 15px;
+            font-family: 'Courier New';
+            font-size: 14px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
             pointer-events: none;
             white-space: pre;
             line-height: 1;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .ascii-art.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .particle {
+            position: fixed;
+            color: #00ff00;
+            font-family: 'Courier New';
+            font-size: 16px;
+            pointer-events: none;
+            z-index: 9;
+            animation: particleFall 1.5s ease-out forwards;
+        }
+
+        @keyframes particleFall {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) rotate(360deg);
+            }
         }
 
         .author-info {
             position: fixed;
-            bottom: 105px;
+            bottom: 140px;
             left: 50%;
             transform: translateX(-50%);
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
             pointer-events: none;
-            line-height: 1.4;
+            line-height: 1.2;
+            font-family: 'Courier New';
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .author-info.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         .author-name {
             font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 5px;
         }
 
         .author-details {
@@ -134,9 +352,34 @@
             font-size: 12px;
         }
 
-        .author-details .passion {
-            color: #aaa;
-            font-style: italic;
+        .project-info {
+            position: fixed;
+            bottom: 115px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4c9aff;
+            font-size: 10px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+            pointer-events: auto;
+            line-height: 1.2;
+            font-family: 'Courier New';
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
+        }
+
+        .project-info a {
+            color: #4c9aff;
+            text-decoration: none;
+            border-bottom: 1px dashed #4c9aff;
+        }
+
+        .project-info a:hover {
+            color: #66a8ff;
+            border-bottom: 1px solid #66a8ff;
         }
 
         .links {
@@ -147,25 +390,49 @@
             color: white;
             font-size: 14px;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
             display: flex;
             gap: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease 0.7s, visibility 0.5s ease 0.7s;
+        }
+
+        .links.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         .social-link {
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 10px;
             background: rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            transition: background 0.3s ease;
-            text-transform: uppercase;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
 
         .social-link:hover {
             background: rgba(0, 0, 0, 0.8);
             color: white;
+            transform: scale(1.1);
+        }
+
+        .social-link i {
+            font-size: 20px;
+            filter: drop-shadow(0 0 0 transparent);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            filter: drop-shadow(0 0 0 transparent);
         }
 
         .copyright-footer {
@@ -181,6 +448,7 @@
             z-index: 11;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             line-height: 1.3;
+            font-family: 'Courier New';
         }
 
         .copyright-footer a {
@@ -192,44 +460,89 @@
             text-decoration: underline;
         }
 
+        .content-backdrop {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+            z-index: 9;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            pointer-events: none;
+        }
+
+        .content-backdrop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
         @media (max-width: 768px) {
             .ascii-art {
-                font-size: 8px;
-                bottom: 175px;
+                font-size: 10px;
+                bottom: 195px;
+                line-height: 0.9;
             }
 
             .author-info {
-                font-size: 12px;
-                bottom: 110px;
+                font-size: 13px;
+                bottom: 140px;
+                line-height: 1.1;
             }
 
             .author-name {
                 font-size: 14px;
-                margin-bottom: 12px;
+                margin-bottom: 5px;
             }
 
             .author-details {
+                font-size: 11px;
+            }
+
+            .project-info {
                 font-size: 10px;
+                bottom: 110px;
+                max-width: 95%;
+                line-height: 1.1;
             }
 
             .links {
-                font-size: 12px;
-                bottom: 70px;
+                font-size: 14px;
+                bottom: 60px;
+                gap: 12px;
+            }
+
+            .social-link {
+                width: 42px;
+                height: 42px;
+                padding: 8px;
+            }
+
+            .social-link i {
+                font-size: 20px;
+            }
+
+            .social-link svg {
+                width: 20px;
+                height: 20px;
             }
 
             .copyright-footer {
-                font-size: 9px;
+                font-size: 8px;
                 padding: 6px 8px;
+                line-height: 1.2;
             }
 
             .start-button {
-                padding: 15px 30px;
-                font-size: 18px;
+                padding: 16px 32px;
+                font-size: 19px;
             }
 
             .lyrics {
-                font-size: 32px;
-                padding: 0 20px;
+                font-size: 34px;
+                padding: 0 15px;
             }
         }
     </style>
@@ -242,7 +555,7 @@
                    loop
                    playsinline>
                 <source src="https://cdnx.s3.cloud.ru/Brown%20Paper%20Bag%20VHS%20Rip%20---%20dev.tatar.mp4" type="video/mp4">
-                Ваш браузер не поддерживает воспроизведение видео.
+                Not supported by your browser. Sorry mate.
             </video>
         </div>
 
@@ -254,6 +567,8 @@
 
         <div class="lyrics" id="lyrics"></div>
 
+        <div class="content-backdrop"></div>
+
         <div class="ascii-art">
        __           __        __            
   ____/ /__ _   __ / /_____ _/ /_____ ______
@@ -263,23 +578,112 @@
 
         <div class="author-info">
             <div class="author-name">Daniar Mannanov</div>
-            <div class="author-details">Full-stack Developer • <span class="passion">Music Lover</span></div>
+            <div class="author-details">Kazan, Russia • Full-stack Developer • Music Lover</span></div>
+        </div>
+
+                <div class="project-info">
+            <strong>cli-modplayer</strong> • play MOD/XM/IT in terminal<br>
+            <a href="https://dev.tatar/cli-modplayer" target="_blank">dev.tatar/cli-modplayer</a>
         </div>
 
         <div class="links">
-            <a href="https://t.me/everydaylinuxuser" target="_blank" class="social-link">telegram</a>
-            <a href="https://github.com/master290" target="_blank" class="social-link">github</a>
+            <a href="https://t.me/everydaylinuxuser" target="_blank" class="social-link" title="Telegram">
+                <i class="fa-brands fa-telegram"></i>
+            </a>
+            <a href="https://github.com/master290" target="_blank" class="social-link" title="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="mailto:daniar@dev.tatar" class="social-link" title="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://genius.com/DaniarMannanov" target="_blank" class="social-link" title="Genius">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><title>Genius icon</title><path d="M12.897 1.235c-.36.001-.722.013-1.08.017-.218-.028-.371.225-.352.416-.035 1.012.023 2.025-.016 3.036-.037.841-.555 1.596-1.224 2.08-.5.345-1.118.435-1.671.663.121.78.434 1.556 1.057 2.07 1.189 1.053 3.224.86 4.17-.426.945-1.071.453-2.573.603-3.854.286-.48.937-.132 1.317-.49-.34-1.249-.81-2.529-1.725-3.472a11.125 11.125 0 00-1.08-.04zm-10.42.006C.53 2.992-.386 5.797.154 8.361c.384 2.052 1.682 3.893 3.45 4.997.134-.23.23-.476.09-.73-.95-2.814-.138-6.119 1.986-8.19.014-.986.043-1.976-.003-2.961l-.188-.214c-1.003-.051-2.008 0-3.01-.022zm17.88.055l-.205.356c.265.938.6 1.862.72 2.834.58 3.546-.402 7.313-2.614 10.14-1.816 2.353-4.441 4.074-7.334 4.773-2.66.66-5.514.45-8.064-.543-.068.079-.207.237-.275.318 2.664 2.629 6.543 3.969 10.259 3.498 3.075-.327 5.995-1.865 8.023-4.195 1.935-2.187 3.083-5.07 3.125-7.992.122-3.384-1.207-6.819-3.636-9.19z"/></svg>
+            </a>
+            <a href="https://discord.com/users/996143857781710848" target="_blank" class="social-link" title="Discord">
+                <i class="fa-brands fa-discord"></i>
+            </a>
         </div>
 
         <div class="copyright-footer">
             © Music Video: <strong>Roni Size / Reprazent - Brown Paper Bag</strong> | 
             All rights belong to their respective owners | 
-            <a href="https://en.wikipedia.org/wiki/Talkin%27_Loud">Talkin' Loud Records</a> / <a href="https://en.wikipedia.org/wiki/Mercury_Records">Mercury Records</a> / <a href="https://www.universalmusic.com/">Universal Music Group</a> | 
+            Talkin' Loud Records / Mercury Records / Universal Music Group | 
             Used for non-commercial purposes
         </div>
     </div>
 
    <script>
+        // ASCII art morphing effect
+        const finalAscii = `       __           __        __            
+  ____/ /__ _   __ / /_____ _/ /_____ ______
+ / __  / _ \\ | / // __/ __ \`/ __/ __ \`/ ___/
+/ /_/ /  __/ |/ // /_/ /_/ / /_/ /_/ / /    
+\\__,_/\\___/|___(_)__/\\__,_/\\__/\\__,_/_/     `;
+
+        function morphText(element, finalHTML, speed = 0.15) {
+            // Extract text content only, preserving HTML structure
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = finalHTML;
+            const textContent = tempDiv.textContent || tempDiv.innerText;
+            
+            const symbols = ['#', '*', '@', '%', '&', '+', '~'];
+            
+            // Create initial random text
+            let currentText = textContent.split('').map(char => {
+                if (char === ' ' || char === '\n' || char === '\t') return char;
+                return symbols[Math.floor(Math.random() * symbols.length)];
+            }).join('');
+            
+            // Function to replace text content while preserving HTML
+            function setTextWithHTML(text) {
+                tempDiv.innerHTML = finalHTML;
+                const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
+                let textIndex = 0;
+                let node;
+                
+                while (node = walker.nextNode()) {
+                    const nodeLength = node.textContent.length;
+                    node.textContent = text.substr(textIndex, nodeLength);
+                    textIndex += nodeLength;
+                }
+                
+                element.innerHTML = tempDiv.innerHTML;
+            }
+            
+            setTextWithHTML(currentText);
+            
+            // Gradually reveal real text
+            const chars = textContent.split('');
+            let currentChars = currentText.split('');
+            let revealed = 0;
+            const totalChars = chars.filter(c => c !== ' ' && c !== '\n' && c !== '\t').length;
+            
+            const interval = setInterval(() => {
+                for (let i = 0; i < chars.length; i++) {
+                    if (currentChars[i] !== chars[i] && chars[i] !== ' ' && chars[i] !== '\n' && chars[i] !== '\t') {
+                        if (Math.random() < speed) {
+                            currentChars[i] = chars[i];
+                            revealed++;
+                        } else {
+                            currentChars[i] = symbols[Math.floor(Math.random() * symbols.length)];
+                        }
+                    }
+                }
+                
+                setTextWithHTML(currentChars.join(''));
+                
+                if (revealed >= totalChars) {
+                    clearInterval(interval);
+                    element.innerHTML = finalHTML;
+                }
+            }, 40);
+        }
+
+        function morphAsciiArt() {
+            const asciiArt = document.querySelector('.ascii-art');
+            morphText(asciiArt, finalAscii, 0.2);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const overlay = document.getElementById('overlay');
             const startButton = document.getElementById('startButton');
@@ -296,13 +700,40 @@
                 overlay.classList.add('hidden');
                 video.muted = false;
                 video.play().then(() => {
-                    console.log('Видео запущено со звуком');
+                    console.log('st');
                 }).catch(err => {
-                    console.log('Ошибка автозапуска:', err);
+                    console.log(err);
                     setTimeout(() => {
-                        video.play().catch(e => console.log('Повторная ошибка:', e));
+                        video.play().catch(e => console.log(e));
                     }, 500);
                 });
+                
+                // Show all elements with animation
+                setTimeout(() => {
+                    document.querySelector('.content-backdrop').classList.add('visible');
+                }, 200);
+                
+                setTimeout(() => {
+                    const asciiArt = document.querySelector('.ascii-art');
+                    asciiArt.classList.add('visible');
+                    morphAsciiArt();
+                }, 300);
+                
+                setTimeout(() => {
+                    const authorInfo = document.querySelector('.author-info');
+                    authorInfo.classList.add('visible');
+                    const authorHTML = authorInfo.innerHTML;
+                    morphText(authorInfo, authorHTML, 0.15);
+                }, 500);
+                
+                setTimeout(() => {
+                    const projectInfo = document.querySelector('.project-info');
+                    projectInfo.classList.add('visible');
+                    const projectHTML = projectInfo.innerHTML;
+                    morphText(projectInfo, projectHTML, 0.15);
+                }, 700);
+                
+                setTimeout(() => document.querySelector('.links').classList.add('visible'), 900);
             });
 
             video.addEventListener('timeupdate', updateLyrics);
@@ -320,7 +751,7 @@
 
             window.addEventListener('focus', function() {
                 if (overlay.classList.contains('hidden') && video.paused) {
-                    video.play().catch(err => console.log('Ошибка автозапуска при фокусе:', err));
+                    video.play().catch(err => console.log(err));
                 }
             });
         });
