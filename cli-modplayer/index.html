@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cli-modplayer - MOD Tracker Player for Linux</title>
+    <title>cli-modplayer - MOD Player in terminal for Linux</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Courier New', monospace;
-            background: #0a0e27;
-            color: #e0e0e0;
+            background: #10121a;
+            color: #e6e6e6;
             line-height: 1.6;
         }
 
@@ -27,20 +27,20 @@
         header {
             text-align: center;
             margin-bottom: 60px;
-            border-bottom: 2px solid #4c9aff;
+            border-bottom: 2px solid #765cc7;
             padding-bottom: 30px;
         }
 
         h1 {
             font-size: 2.5em;
-            color: #4c9aff;
+            color: #81c8be;
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
 
         .tagline {
             font-size: 1.1em;
-            color: #a0a0a0;
+            color: #a0a4b6;
         }
 
         .video-section {
@@ -53,7 +53,7 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border: 2px solid #4c9aff;
+            border: 2px solid #765cc7;
             border-radius: 4px;
         }
 
@@ -70,14 +70,14 @@
         }
 
         h2 {
-            color: #4c9aff;
+            color: #81c8be;
             margin-bottom: 20px;
             font-size: 1.8em;
         }
 
         p {
             margin-bottom: 15px;
-            color: #c0c0c0;
+            color: #a0a4b6;
         }
 
         .features {
@@ -89,18 +89,19 @@
             padding: 8px 0;
             padding-left: 20px;
             position: relative;
+            color: #e6e6e6;
         }
 
         .features li:before {
             content: "▸";
             position: absolute;
             left: 0;
-            color: #4c9aff;
+            color: #81c8be;
         }
 
         .install-box {
-            background: #1a1f3a;
-            border-left: 4px solid #4c9aff;
+            background: #1a1c26;
+            border-left: 4px solid #765cc7;
             padding: 20px;
             margin: 20px 0;
             border-radius: 4px;
@@ -109,13 +110,13 @@
 
         code {
             font-family: 'Courier New', monospace;
-            color: #6dd4ff;
+            color: #7cc892;
         }
 
         .button {
             display: inline-block;
-            background: #4c9aff;
-            color: #0a0e27;
+            background: #81c8be;
+            color: #10121a;
             padding: 12px 30px;
             text-decoration: none;
             border-radius: 4px;
@@ -125,7 +126,7 @@
         }
 
         .button:hover {
-            background: #6dd4ff;
+            background: #7cc892;
         }
 
         .buttons {
@@ -136,8 +137,8 @@
             text-align: center;
             margin-top: 60px;
             padding-top: 30px;
-            border-top: 1px solid #2a2f4a;
-            color: #707070;
+            border-top: 1px solid #765cc7;
+            color: #a0a4b6;
         }
 
         .controls-grid {
@@ -148,14 +149,36 @@
         }
 
         .control-item {
-            background: #1a1f3a;
+            background: #1a1c26;
             padding: 12px;
             border-radius: 4px;
         }
 
         .key {
-            color: #4c9aff;
+            color: #81c8be;
             font-weight: bold;
+        }
+
+        .aur-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #765cc7;
+            color: #e6e6e6;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 10px 10px 0;
+            transition: background 0.3s;
+        }
+
+        .aur-badge:hover {
+            background: #8b6fe0;
+        }
+
+        .aur-badge::before {
+            content: "📦";
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -198,7 +221,20 @@
         </section>
 
         <section>
-            <h2>Get it running</h2>
+            <h2>Installation</h2>
+            
+            <h3 style="color: #81c8be; font-size: 1.3em; margin: 20px 0 10px 0;">Arch Linux (AUR)</h3>
+            <p>Install directly from AUR using your favorite AUR helper:</p>
+            <div class="install-box">
+                <code>yay -S cli-modplayer</code><br>
+                <code># or</code><br>
+                <code>paru -S cli-modplayer</code>
+            </div>
+            <div class="buttons">
+                <a href="https://aur.archlinux.org/packages/cli-modplayer" class="aur-badge" target="_blank">View on AUR</a>
+            </div>
+
+            <h3 style="color: #81c8be; font-size: 1.3em; margin: 30px 0 10px 0;">Build from source</h3>
             <p>You need these packages (Debian/Ubuntu example):</p>
             <div class="install-box">
                 <code>sudo apt install g++ cmake libopenmpt-dev portaudio19-dev</code>
