@@ -96,184 +96,6 @@
             display: block;
         }
 
-        @keyframes glitchReveal {
-            0% {
-                opacity: 0;
-                filter: blur(10px);
-                text-shadow: 
-                    -5px -5px 0 #00ff00,
-                    5px 5px 0 #ff00ff,
-                    -5px 5px 0 #00ffff,
-                    5px -5px 0 #ffff00;
-            }
-            20% {
-                opacity: 0.5;
-                filter: blur(5px);
-                text-shadow: 
-                    -3px -3px 0 #00ff00,
-                    3px 3px 0 #ff00ff,
-                    -3px 3px 0 #00ffff,
-                    3px -3px 0 #ffff00;
-            }
-            40% {
-                opacity: 0.7;
-                filter: blur(3px);
-                text-shadow: 
-                    -2px -2px 0 #00ff00,
-                    2px 2px 0 #ff00ff;
-            }
-            60% {
-                opacity: 0.9;
-                filter: blur(1px);
-            }
-            100% {
-                opacity: 1;
-                filter: blur(0);
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            }
-        }
-
-        .ascii-art {
-            position: fixed;
-            bottom: 115px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #00ff00;
-            font-size: 10px;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            z-index: 10;
-            pointer-events: auto;
-            line-height: 1.2;
-            font-family: 'Courier New';
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
-        }
-
-        .project-info.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .project-info a {
-            color: #4c9aff;
-            text-decoration: none;
-            border-bottom: 1px dashed #4c9aff;
-        }
-
-        .project-info a:hover {
-            color: #66a8ff;
-            border-bottom: 1px solid #66a8ff;
-        }
-
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background-color: #000;
-            pointer-events: none;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            transition: opacity 0.5s ease;
-        }
-
-        .overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .start-button {
-            background: #808080;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            font-family: 'Courier New';
-        }
-
-        .lyrics {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 48px;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            z-index: 10;
-            display: none;
-            pointer-events: none;
-            text-transform: uppercase;
-            line-height: 1.2;
-            font-family: 'Courier New';
-        }
-
-        .lyrics.show {
-            display: block;
-        }
-
-        @keyframes glitchReveal {
-            0% {
-                opacity: 0;
-                filter: blur(10px);
-                text-shadow: 
-                    -5px -5px 0 #00ff00,
-                    5px 5px 0 #ff00ff,
-                    -5px 5px 0 #00ffff,
-                    5px -5px 0 #ffff00;
-            }
-            20% {
-                opacity: 0.5;
-                filter: blur(5px);
-                text-shadow: 
-                    -3px -3px 0 #00ff00,
-                    3px 3px 0 #ff00ff,
-                    -3px 3px 0 #00ffff,
-                    3px -3px 0 #ffff00;
-            }
-            40% {
-                opacity: 0.7;
-                filter: blur(3px);
-                text-shadow: 
-                    -2px -2px 0 #00ff00,
-                    2px 2px 0 #ff00ff;
-            }
-            60% {
-                opacity: 0.9;
-                filter: blur(1px);
-            }
-            100% {
-                opacity: 1;
-                filter: blur(0);
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            }
-        }
-
         .ascii-art {
             position: fixed;
             bottom: 210px;
@@ -296,27 +118,6 @@
         .ascii-art.visible {
             opacity: 1;
             visibility: visible;
-        }
-
-        .particle {
-            position: fixed;
-            color: #00ff00;
-            font-family: 'Courier New';
-            font-size: 16px;
-            pointer-events: none;
-            z-index: 9;
-            animation: particleFall 1.5s ease-out forwards;
-        }
-
-        @keyframes particleFall {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) rotate(360deg);
-            }
         }
 
         .author-info {
@@ -369,6 +170,11 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
+        }
+
+        .project-info.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
         .project-info a {
@@ -554,7 +360,7 @@
                    preload="auto"
                    loop
                    playsinline>
-                <source src="https://cdnx.s3.cloud.ru/Brown%20Paper%20Bag%20VHS%20Rip%20---%20dev.tatar.mp4" type="video/mp4">
+                <source id="video-source" src="" type="video/mp4">
                 Not supported by your browser. Sorry mate.
             </video>
         </div>
@@ -577,14 +383,11 @@
 \__,_/\___/|___(_)__/\__,_/\__/\__,_/_/     </div>
 
         <div class="author-info">
-            <div class="author-name">Daniar Mannanov</div>
-            <div class="author-details">Kazan, Russia • Full-stack Developer • Music Lover</span></div>
+            <div class="author-name"></div>
+            <div class="author-details"></div>
         </div>
 
-                <div class="project-info">
-            <strong>cli-modplayer</strong> • play MOD/XM/IT in terminal<br>
-            <a href="https://dev.tatar/cli-modplayer" target="_blank">dev.tatar/cli-modplayer</a>
-        </div>
+                <div class="project-info"></div>
 
         <div class="links">
             <a href="https://t.me/everydaylinuxuser" target="_blank" class="social-link" title="Telegram">
@@ -604,37 +407,52 @@
             </a>
         </div>
 
-        <div class="copyright-footer">
-            © Music Video: <strong>Roni Size / Reprazent - Brown Paper Bag</strong> | 
-            All rights belong to their respective owners | 
-            Talkin' Loud Records / Mercury Records / Universal Music Group | 
-            Used for non-commercial purposes
+        <div class="copyright-footer" id="copyright-footer">
         </div>
     </div>
 
    <script>
-        // ASCII art morphing effect
+        const backgrounds = [
+            {
+                video: 'https://cdnx.s3.cloud.ru/Brown%20Paper%20Bag%20VHS%20Rip%20---%20dev.tatar.mp4',
+                footer: '© Music Video: <strong>Roni Size / Reprazent - Brown Paper Bag</strong> | All rights belong to their respective owners | Talkin\' Loud Records / Mercury Records / Universal Music Group | Used for non-commercial purposes'
+            },
+            {
+                video: 'https://cdnx.s3.cloud.ru/Watching%20Windows.mp4',
+                footer: '© Music Video: <strong>Roni Size / Reprazent - Watching Windows</strong> | All rights belong to their respective owners | Talkin\' Loud Records / Mercury Records / Universal Music Group | Used for non-commercial purposes'
+            }
+        ];
+        
+        const selectedBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        
+        document.getElementById('video-source').src = selectedBackground.video;
+        document.getElementById('main-video').load();
+        
+        document.getElementById('copyright-footer').innerHTML = selectedBackground.footer;
+        
         const finalAscii = `       __           __        __            
   ____/ /__ _   __ / /_____ _/ /_____ ______
  / __  / _ \\ | / // __/ __ \`/ __/ __ \`/ ___/
 / /_/ /  __/ |/ // /_/ /_/ / /_/ /_/ / /    
 \\__,_/\\___/|___(_)__/\\__,_/\\__/\\__,_/_/     `;
-
+        
         function morphText(element, finalHTML, speed = 0.15) {
-            // Extract text content only, preserving HTML structure
+            if (element.morphInterval) {
+                clearInterval(element.morphInterval);
+                delete element.morphInterval;
+            }
+            
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = finalHTML;
             const textContent = tempDiv.textContent || tempDiv.innerText;
             
             const symbols = ['#', '*', '@', '%', '&', '+', '~'];
             
-            // Create initial random text
             let currentText = textContent.split('').map(char => {
                 if (char === ' ' || char === '\n' || char === '\t') return char;
                 return symbols[Math.floor(Math.random() * symbols.length)];
             }).join('');
             
-            // Function to replace text content while preserving HTML
             function setTextWithHTML(text) {
                 tempDiv.innerHTML = finalHTML;
                 const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT);
@@ -652,13 +470,12 @@
             
             setTextWithHTML(currentText);
             
-            // Gradually reveal real text
             const chars = textContent.split('');
             let currentChars = currentText.split('');
             let revealed = 0;
             const totalChars = chars.filter(c => c !== ' ' && c !== '\n' && c !== '\t').length;
             
-            const interval = setInterval(() => {
+            element.morphInterval = setInterval(() => {
                 for (let i = 0; i < chars.length; i++) {
                     if (currentChars[i] !== chars[i] && chars[i] !== ' ' && chars[i] !== '\n' && chars[i] !== '\t') {
                         if (Math.random() < speed) {
@@ -673,7 +490,8 @@
                 setTextWithHTML(currentChars.join(''));
                 
                 if (revealed >= totalChars) {
-                    clearInterval(interval);
+                    clearInterval(element.morphInterval);
+                    delete element.morphInterval;
                     element.innerHTML = finalHTML;
                 }
             }, 40);
@@ -684,11 +502,72 @@
             morphText(asciiArt, finalAscii, 0.2);
         }
 
+        // Button text alternation
+        const buttonTexts = ['continue', 'продолжить'];
+        let currentButtonIndex = 0;
+        let buttonInterval;
+
+        function cycleButtonText() {
+            const startButton = document.getElementById('startButton');
+            currentButtonIndex = (currentButtonIndex + 1) % buttonTexts.length;
+            morphText(startButton, buttonTexts[currentButtonIndex], 0.2);
+        }
+
+        const authorNames = [
+            'Daniar Mannanov',
+            'Данияр Маннанов'
+        ];
+        
+        const authorPhrases = [
+            'Kazan, Russia',
+            'Казань, Россия',
+            'Full-stack Developer',
+            'Фулл-стек разработчик',
+            'C/C++, Python',
+            'Java, Go, PHP',
+            'Music Lover',
+            'Меломан'
+        ];
+        
+        const projectPhrases = [
+            '<strong>cli-modplayer</strong> • play MOD/XM/IT in terminal<br><a href="https://dev.tatar/cli-modplayer" target="_blank">dev.tatar/cli-modplayer</a>',
+            '<strong>cli-modplayer</strong> • воспроизводи MOD/XM/IT в терминале<br><a href="https://dev.tatar/cli-modplayer" target="_blank">dev.tatar/cli-modplayer</a>'
+        ];
+        
+        let currentPhraseIndex = 0;
+        let currentNameIndex = 0;
+        let currentProjectIndex = 0;
+        let contentInterval;
+
+        function cycleContent() {
+            const authorName = document.querySelector('.author-name');
+            const authorDetails = document.querySelector('.author-details');
+            const projectInfo = document.querySelector('.project-info');
+            
+            currentNameIndex = (currentNameIndex + 1) % authorNames.length;
+            currentPhraseIndex = (currentPhraseIndex + 1) % authorPhrases.length;
+            currentProjectIndex = (currentProjectIndex + 1) % projectPhrases.length;
+            
+            morphText(authorName, authorNames[currentNameIndex], 0.15);
+            setTimeout(() => {
+                morphText(authorDetails, authorPhrases[currentPhraseIndex], 0.15);
+            }, 100);
+            setTimeout(() => {
+                morphText(projectInfo, projectPhrases[currentProjectIndex], 0.15);
+            }, 200);
+        }
+
+        function startContentCycle() {
+            contentInterval = setInterval(cycleContent, 3000);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const overlay = document.getElementById('overlay');
             const startButton = document.getElementById('startButton');
             const video = document.getElementById('main-video');
             const lyricsElement = document.getElementById('lyrics');
+
+            buttonInterval = setInterval(cycleButtonText, 1500);
 
             function updateLyrics() {
                 if (video.paused || overlay.classList.contains('hidden') === false) {
@@ -697,6 +576,8 @@
             }
 
             startButton.addEventListener('click', function() {
+                clearInterval(buttonInterval);
+                
                 overlay.classList.add('hidden');
                 video.muted = false;
                 video.play().then(() => {
@@ -708,7 +589,6 @@
                     }, 500);
                 });
                 
-                // Show all elements with animation
                 setTimeout(() => {
                     document.querySelector('.content-backdrop').classList.add('visible');
                 }, 200);
@@ -721,16 +601,18 @@
                 
                 setTimeout(() => {
                     const authorInfo = document.querySelector('.author-info');
+                    const authorName = document.querySelector('.author-name');
+                    const authorDetails = document.querySelector('.author-details');
                     authorInfo.classList.add('visible');
-                    const authorHTML = authorInfo.innerHTML;
-                    morphText(authorInfo, authorHTML, 0.15);
+                    morphText(authorName, authorNames[0], 0.15);
+                    morphText(authorDetails, authorPhrases[0], 0.15);
+                    setTimeout(() => startContentCycle(), 3000);
                 }, 500);
                 
                 setTimeout(() => {
                     const projectInfo = document.querySelector('.project-info');
                     projectInfo.classList.add('visible');
-                    const projectHTML = projectInfo.innerHTML;
-                    morphText(projectInfo, projectHTML, 0.15);
+                    morphText(projectInfo, projectPhrases[0], 0.15);
                 }, 700);
                 
                 setTimeout(() => document.querySelector('.links').classList.add('visible'), 900);
